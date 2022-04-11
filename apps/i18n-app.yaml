@@ -1,0 +1,73 @@
+!content-type:i18n
+name: i18n-app
+label: i18n
+icon: icon-forums-app
+subApps:
+  browser:
+    workbench:
+      contentViews:
+        tree:
+          columns: !override
+            name:
+              $type: jcrTitleColumn
+              expandRatio: 1
+            value:
+              expandRatio: 1
+            activationStatus:
+              $type: jcrStatusColumn
+              width: 200
+    actionbar:
+      sections:
+        folder:
+          groups:
+            activationActions:
+              items:
+                publishRecursive: {}
+            i18n:
+              items:
+                addToTranslationBatch: {}
+        item:
+          groups:
+            activationActions:
+              items:
+                publishRecursive: {}
+            i18n:
+              items:
+                addToTranslationBatch: {}
+    actions:
+      # Publishes the selected node and its children to the public instance
+      publishRecursive:
+        icon: icon-publish-incl-sub
+        $type: jcrCommandAction
+        command: publish
+        asynchronous: true
+        params:
+          recursive: true
+        availability:
+          writePermissionRequired: true
+          rules:
+            isDeletedRule:
+              $type: jcrIsDeletedRule
+              negate: true
+            publishableRule:
+              $type: jcrPublishableRule
+      # DeepL Translator module https://marketplace.magnolia-cms.com/detail/deepl-translator.html action
+      addToTranslationBatch:
+        label: Add to translation batch
+        dialogName: content-translation-support-ext-core:addToTranslationBatch
+        icon: icon-add-folder
+        class: info.magnolia.translation.ext.core.app.batch.action.OpenMultiEditDialogAction$Definition
+        availability:
+          writePermissionRequired: true
+          access:
+            roles:
+              superuser: superuser
+          nodeTypes:
+            folder: mgnl:folder
+            content: mgnl:content
+          rules:
+            notDeleted:
+              $type: jcrIsDeletedRule
+              negate: true
+          multiple: true
+          root: false

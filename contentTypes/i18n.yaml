@@ -1,0 +1,9 @@
+datasource:
+  workspace: i18n
+  autoCreate: true
+model:
+  properties:
+    - name: name
+      required: true
+    - name: value
+      i18n: true

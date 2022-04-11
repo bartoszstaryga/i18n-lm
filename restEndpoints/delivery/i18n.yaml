@@ -1,0 +1,8 @@
+workspace: i18n
+bypassWorkspaceAcls: true
+limit: 1000
+depth: 10
+nodeTypes:
+  - mgnl:folder
+childNodeTypes:
+  - mgnl:content
